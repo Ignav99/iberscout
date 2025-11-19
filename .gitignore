@@ -1,0 +1,104 @@
+# ==========================================
+# IBERSCOUT - GITIGNORE
+# ==========================================
+
+# ===== ENTORNO VIRTUAL =====
+.venv/
+venv/
+ENV/
+env/
+
+# ===== ARCHIVOS DE ENTORNO =====
+.env
+.env.local
+.env.*.local
+
+# ===== PYTHON =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# ===== JUPYTER NOTEBOOKS =====
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ===== DATOS =====
+# No subir datos crudos ni procesados a Git
+data/raw/*
+data/processed/*
+data/db/*
+
+# Permitir archivos .gitkeep para mantener estructura
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/db/.gitkeep
+
+# ===== LOGS =====
+logs/*.log
+*.log
+
+# ===== BASES DE DATOS =====
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== CREDENCIALES Y CLAVES =====
+*.key
+*.pem
+credentials.json
+secrets/
+
+# ===== SCRAPERS =====
+# No subir datos scrapeados temporales
+*.json
+*.csv
+!requirements/*.txt
+
+# ===== SISTEMA OPERATIVO =====
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ===== IDE =====
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+
+# ===== DOCKER =====
+# No incluir volúmenes locales
+docker/volumes/
+
+# ===== PLAYWRIGHT =====
+playwright/.browsers/
+
+# ===== TEMPORAL =====
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*~
+
+# ===== TESTING =====
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ===== OTROS =====
+*.zip
+*.tar.gz
+*.rar

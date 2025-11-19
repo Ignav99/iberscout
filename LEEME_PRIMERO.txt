@@ -1,0 +1,287 @@
+# 📦 PAQUETE COMPLETO - IBERSCOUT
+
+## 🎯 ¿Qué es esto?
+
+Este es el **setup completo** para el proyecto IberScout, tu sistema de inteligencia de datos de fútbol. Todo está listo para que lo descomprimas en tu Mac y empieces a trabajar.
+
+---
+
+## 📁 Contenido del Paquete
+
+Este archivo ZIP contiene:
+
+### 📄 Documentación
+- **README.md**: Visión general del proyecto
+- **INICIO_RAPIDO.md**: Guía para empezar en 5 minutos
+- **INSTALACION.md**: Instrucciones paso a paso detalladas
+- **PLAN_DE_TRABAJO.md**: Roadmap completo de desarrollo
+
+### 🔧 Scripts de Configuración
+- **setup.sh**: Instalación automática (recomendado)
+- **verificar_entorno.py**: Verificador completo del entorno
+- **docker-compose.yml**: Configuración de PostgreSQL
+
+### ⚙️ Configuración
+- **config/settings.py**: Configuración centralizada
+- **config/.env.example**: Template de variables de entorno
+- **docker/init.sql**: Inicialización de base de datos
+- **requirements/research.txt**: Dependencias Python
+
+### 🧪 Scripts de Prueba
+- **research/scrapers_test/01_test_scraper.py**: Primer scraper de prueba
+- **research/test_db_connection.py**: Test de PostgreSQL
+
+### 🛡️ Otros
+- **.gitignore**: Exclusiones para Git
+- Este archivo (LEEME_PRIMERO.txt)
+
+---
+
+## 🚀 Instalación Rápida
+
+### Opción 1: Script Automático (5 minutos)
+
+```bash
+# 1. Descomprimir
+unzip iberscout_setup.zip
+cd iberscout_setup
+
+# 2. Ejecutar instalador
+chmod +x setup.sh
+./setup.sh
+
+# 3. ¡Listo! Verifica que todo funciona
+source .venv/bin/activate
+python verificar_entorno.py
+```
+
+### Opción 2: Manual
+
+Sigue las instrucciones detalladas en **INSTALACION.md**
+
+---
+
+## ✅ Pre-requisitos
+
+Antes de ejecutar el instalador, asegúrate de tener:
+
+1. **Python 3.11+** instalado
+   - Verifica: `python3 --version`
+   - Descarga: https://www.python.org/downloads/
+
+2. **Docker Desktop** instalado y corriendo
+   - Verifica: `docker --version`
+   - Descarga: https://www.docker.com/products/docker-desktop/
+
+3. **Visual Studio Code** (opcional pero recomendado)
+   - Descarga: https://code.visualstudio.com/
+
+---
+
+## 📊 Estructura Final del Proyecto
+
+Después de ejecutar `setup.sh`, tendrás:
+
+```
+iberscout/
+│
+├── 📘 Documentación
+│   ├── README.md
+│   ├── INSTALACION.md
+│   ├── PLAN_DE_TRABAJO.md
+│   └── INICIO_RAPIDO.md
+│
+├── 🔧 Configuración
+│   ├── .env (generado automáticamente)
+│   ├── docker-compose.yml
+│   └── config/
+│       ├── .env.example
+│       └── settings.py
+│
+├── 🐍 Entorno Python
+│   ├── .venv/ (entorno virtual)
+│   └── requirements/
+│       └── research.txt
+│
+├── 🗄️ Base de Datos
+│   ├── docker/
+│   │   └── init.sql
+│   └── data/
+│       ├── raw/
+│       ├── processed/
+│       └── db/
+│
+├── 🧪 Investigación (⭐ TU ZONA DE TRABAJO)
+│   └── research/
+│       ├── notebooks/
+│       ├── scrapers_test/
+│       │   └── 01_test_scraper.py
+│       ├── data_samples/
+│       └── test_db_connection.py
+│
+├── 📁 Producción (futuro)
+│   └── src/
+│
+└── 📋 Logs
+    └── logs/
+```
+
+---
+
+## 🎯 Próximos Pasos (Después de la Instalación)
+
+### Día 1: Setup y Verificación
+1. Ejecutar `setup.sh`
+2. Verificar con `python verificar_entorno.py`
+3. Probar scraper básico: `python research/scrapers_test/01_test_scraper.py`
+4. Explorar la estructura del proyecto
+
+### Día 2-4: Sprint 1 - Primer Equipo
+1. Elegir un equipo de 3ª RFEF
+2. Desarrollar scraper para extraer jugadores
+3. Guardar datos en CSV
+4. Validar calidad de datos
+
+### Día 5-6: Sprint 2 - Base de Datos
+1. Cargar CSV en PostgreSQL
+2. Verificar integridad de datos
+3. Hacer queries básicas
+
+### Semana 2: Continuar según PLAN_DE_TRABAJO.md
+
+---
+
+## 🛠️ Stack Tecnológico
+
+Este proyecto usa:
+
+| Componente | Tecnología | Propósito |
+|------------|-----------|-----------|
+| **Lenguaje** | Python 3.11+ | Desarrollo principal |
+| **Scraping** | Playwright | Navegador automatizado |
+| **Parsing** | BeautifulSoup | Extracción de HTML |
+| **Datos** | Pandas | Manipulación de datos |
+| **Base de Datos** | PostgreSQL 16 | Almacenamiento |
+| **Contenedores** | Docker | Aislamiento de servicios |
+| **Notebooks** | Jupyter | Experimentación |
+
+---
+
+## 📖 Filosofía del Proyecto
+
+Este proyecto sigue el principio **"Construir, Comprobar, Guardar"**:
+
+1. **Construir**: Desarrollar incrementalmente (pequeños pasos)
+2. **Comprobar**: Validar cada componente antes de avanzar
+3. **Guardar**: Versionar y documentar todo
+
+### Arquitectura "Lego"
+- Cada componente es independiente
+- Se pueden intercambiar sin romper el sistema
+- Empezamos simple y evolucionamos
+
+---
+
+## 🔒 Seguridad y Buenas Prácticas
+
+✅ **Incluido en el setup:**
+- Variables de entorno (.env) con passwords aleatorios
+- .gitignore configurado para no subir datos sensibles
+- Rate limiting en scrapers para "polite scraping"
+- Logs estructurados para debugging
+
+⚠️ **Recuerda:**
+- Nunca subas el archivo `.env` a GitHub
+- Cambia las credenciales de PostgreSQL si vas a producción
+- Respeta los robots.txt de las webs que scrapees
+
+---
+
+## 📚 Recursos Útiles
+
+### Documentación Oficial
+- Playwright: https://playwright.dev/python/
+- PostgreSQL: https://www.postgresql.org/docs/
+- Pandas: https://pandas.pydata.org/docs/
+- Docker: https://docs.docker.com/
+
+### Tutoriales Recomendados
+- Web Scraping con Playwright: https://www.youtube.com/results?search_query=playwright+python
+- PostgreSQL Básico: https://www.postgresqltutorial.com/
+- Pandas para análisis: https://pandas.pydata.org/docs/getting_started/intro_tutorials/
+
+---
+
+## 🆘 Soporte
+
+### Si algo falla durante la instalación:
+
+1. **Revisa los logs**: Cada script muestra mensajes detallados
+2. **Consulta INSTALACION.md**: Tiene una sección de "Solución de problemas"
+3. **Ejecuta el verificador**: `python verificar_entorno.py`
+
+### Problemas comunes:
+
+- **"Puerto 5432 ocupado"**: Tienes PostgreSQL local corriendo
+- **"Docker no responde"**: Reinicia Docker Desktop
+- **"ModuleNotFoundError"**: Activa el entorno virtual
+
+---
+
+## 🎉 ¡Empecemos!
+
+1. Descomprime este ZIP
+2. Abre una terminal
+3. Ejecuta `./setup.sh`
+4. Lee **PLAN_DE_TRABAJO.md**
+5. ¡A codear! 🚀
+
+---
+
+## 📞 Información del Proyecto
+
+- **Nombre**: IberScout
+- **Objetivo**: Sistema de inteligencia de datos de fútbol español
+- **Alcance**: 2ª RFEF, 3ª RFEF, División de Honor
+- **Cliente**: Club Atlético Central (Ignacio)
+- **Fecha de inicio**: 19-Nov-2025
+- **Fase actual**: Investigación y Validación
+
+---
+
+## 📝 Checklist de Instalación
+
+Marca cuando completes cada paso:
+
+- [ ] Descomprimir ZIP
+- [ ] Verificar Python 3.11+ instalado
+- [ ] Verificar Docker Desktop corriendo
+- [ ] Ejecutar `setup.sh`
+- [ ] Activar entorno virtual
+- [ ] Ejecutar `python verificar_entorno.py`
+- [ ] Todas las verificaciones pasan ✅
+- [ ] Ejecutar scraper de prueba
+- [ ] Leer PLAN_DE_TRABAJO.md
+- [ ] Abrir proyecto en VS Code
+
+---
+
+## 🌟 Filosofía de Desarrollo
+
+> "No hay código perfecto a la primera. Iteramos, mejoramos, aprendemos."
+
+Este proyecto está diseñado para:
+- ✅ Empezar simple y crecer
+- ✅ Validar cada paso antes de avanzar
+- ✅ Documentar todo para tu futuro yo
+- ✅ Ser modular y mantenible
+- ✅ Respetar las buenas prácticas
+
+---
+
+**¡Buena suerte con IberScout! 🏆⚽**
+
+**Autor**: Ignacio  
+**Organización**: Club Atlético Central  
+**Versión**: 1.0.0  
+**Fecha**: 19-Noviembre-2025
