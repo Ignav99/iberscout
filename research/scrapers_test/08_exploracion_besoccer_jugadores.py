@@ -44,7 +44,12 @@ async def extraer_datos_tabla_plantilla(page):
         enlace_jugador = fila.find('a', href=lambda x: x and '/jugador/' in x)
         url_jugador = None
         if enlace_jugador:
-            url_jugador = "https://es.besoccer.com" + enlace_jugador.get('href')
+            href = enlace_jugador.get('href')
+            # Verificar si ya es URL completa o solo path
+            if href.startswith('http'):
+                url_jugador = href
+            else:
+                url_jugador = "https://es.besoccer.com" + href
 
         jugador = {
             "dorsal": datos[0] if len(datos) > 0 else None,
