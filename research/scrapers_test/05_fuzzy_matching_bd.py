@@ -18,9 +18,10 @@ DB_CONFIG = {
     'password': 'TIZ@voltio999'
 }
 
-# Configuración del algoritmo (basado en resultados del test)
-ALGORITMO = fuzz.token_sort_ratio  # Cambiar según resultados de 04_fuzzy_matching_test.py
-UMBRAL = 85  # Umbral de similitud (ajustar según necesidad)
+# Configuración del algoritmo (basado en resultados del test 04_fuzzy_matching_test.py)
+# MEJOR CONFIGURACIÓN: partial_ratio con umbral 70% (F1-Score: 0.94)
+ALGORITMO = fuzz.partial_ratio
+UMBRAL = 70  # Umbral óptimo según validación
 
 print("\n" + "="*70)
 print("🔍 SPRINT 3: FUZZY MATCHING - ANÁLISIS DE BD")
