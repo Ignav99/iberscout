@@ -7,6 +7,7 @@ Lee el CSV generado por 02_analisis_liga.py y carga los datos en PostgreSQL
 
 import sys
 import pandas as pd
+import numpy as np
 from pathlib import Path
 from datetime import datetime
 import psycopg2
@@ -110,6 +111,24 @@ def limpiar_datos(df):
     return df
 
 
+def convertir_valor_python(valor):
+    """Convierte valores de pandas/numpy a tipos Python estándar"""
+    # Si es NaN o NaT → None (NULL en SQL)
+    if pd.isna(valor):
+        return None
+
+    # Si es numpy.int64 → int
+    if isinstance(valor, (np.integer,)):
+        return int(valor)
+
+    # Si es numpy.float64 → float
+    if isinstance(valor, (np.floating,)):
+        return float(valor)
+
+    # Cualquier otro tipo → devolver tal cual
+    return valor
+
+
 def cargar_datos(conn, df):
     """Carga los datos en PostgreSQL usando batch insert"""
     print(f"\n💾 Cargando {len(df)} registros en PostgreSQL...")
@@ -130,7 +149,8 @@ def cargar_datos(conn, df):
     timestamp = datetime.now()
     datos = []
     for _, row in df.iterrows():
-        tupla = tuple(row[col] if col in row.index else None for col in columnas)
+        # Convertir cada valor a tipo Python estándar
+        tupla = tuple(convertir_valor_python(row[col]) if col in row.index else None for col in columnas)
         tupla = tupla + ('besoccer', timestamp)  # Agregar source y timestamp
         datos.append(tupla)
 
