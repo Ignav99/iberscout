@@ -31,8 +31,16 @@ async def explorar_ficha_completa(page, url):
     print(f"🔬 EXPLORACIÓN EXHAUSTIVA: {NOMBRE}")
     print("="*70 + "\n")
 
-    await page.goto(url, wait_until="networkidle", timeout=60000)
-    await page.wait_for_timeout(5000)
+    try:
+        await page.goto(url, wait_until="domcontentloaded", timeout=90000)
+        print("✅ DOM cargado")
+    except Exception as e:
+        print(f"⚠️  Error en goto: {str(e)[:100]}")
+        print("   Intentando con wait_until='load'...")
+        await page.goto(url, wait_until="load", timeout=90000)
+
+    print("⏳ Esperando 8 segundos para JavaScript y tablas...")
+    await page.wait_for_timeout(8000)
 
     content = await page.content()
     soup = BeautifulSoup(content, 'html.parser')
