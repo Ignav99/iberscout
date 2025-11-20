@@ -66,25 +66,23 @@ async def extraer_equipos():
         # Parsear con BeautifulSoup
         soup = BeautifulSoup(content, 'html.parser')
 
-        # Buscar TODOS los enlaces de equipos (pueden estar en diferentes lugares)
-        enlaces_equipos = []
-
-        # Buscar en la tabla de clasificación
+        # Buscar SOLO en la tabla de clasificación (NO en banners/widgets)
         tabla = soup.find('table', class_='table-striped') or soup.find('table')
-        if tabla:
-            enlaces_equipos.extend(tabla.find_all('a', href=re.compile(r'/equipo/')))
 
-        # Buscar también en otras secciones de la página
-        for enlace in soup.find_all('a', href=re.compile(r'/equipo/')):
-            if enlace not in enlaces_equipos:
-                enlaces_equipos.append(enlace)
-
-        if not enlaces_equipos:
-            print("❌ No se encontraron enlaces de equipos")
+        if not tabla:
+            print("❌ No se encontró tabla de clasificación")
             await browser.close()
             return []
 
-        print(f"✅ Enlaces encontrados: {len(enlaces_equipos)}")
+        # Extraer SOLO enlaces de equipos de la tabla
+        enlaces_equipos = tabla.find_all('a', href=re.compile(r'/equipo/'))
+
+        if not enlaces_equipos:
+            print("❌ No se encontraron enlaces de equipos en la tabla")
+            await browser.close()
+            return []
+
+        print(f"✅ Enlaces encontrados en tabla: {len(enlaces_equipos)}")
 
         equipos = []
         equipos_vistos = set()  # Para evitar duplicados
